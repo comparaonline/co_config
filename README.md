@@ -1,4 +1,5 @@
 # CoConfig
+[![Circle CI](https://circleci.com/gh/comparaonline/co_config.svg?style=svg)](https://circleci.com/gh/comparaonline/co_config)
 
 This is a simple gem to load configuration files on rails.
 
