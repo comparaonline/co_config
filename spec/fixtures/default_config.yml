@@ -1,0 +1,6 @@
+---
+defaults:
+  test_value: 'test value from defaults!'
+
+test_env:
+  test_value: 'test value from env!'

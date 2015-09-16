@@ -1,8 +1,6 @@
 # CoConfig
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/co_config`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This is a simple gem to load configuration files on rails.
 
 ## Installation
 
@@ -22,7 +20,38 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Create a `configuration.rb` file on your rails application's config folder.
+This file will indicate which files are loaded.
+
+```ruby
+# To load the test.yml file into the CoConfig::TEST hash
+load 'test' 
+
+# To validate the configuration you could use
+load 'test2' { |c| c.token.present? } 
+# or
+load 'test3' { |c| raise if token.empty? }
+```
+
+YAML files must have a root key called like the current `Rails.env`. A key called `defaults` can be used to specify defaults for undefined environments.
+
+```yaml
+# test.yml
+---
+
+development:
+   value: 1
+```
+
+```yaml
+# test2.yml
+---
+
+defaults:
+   token: 'MYAWESOMETOKEN'
+```
+
+To read your configuration you can access the hash (with indifferent access) at `CoConfig::CONFIG_NAME_UPPERCASE`
 
 ## Development
 
