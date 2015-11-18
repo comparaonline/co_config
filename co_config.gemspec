@@ -2,9 +2,6 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'co_config/version'
-require 'pathname'
-
-readme = Pathname.new(File.expand_path('../readme.md', __FILE__))
 
 Gem::Specification.new do |spec|
   spec.name          = "co_config"
@@ -13,7 +10,11 @@ Gem::Specification.new do |spec|
   spec.email         = ["erabinovich@gmail.com"]
 
   spec.summary       = %q{Simple configuration management gem.}
-  spec.description   = readme.read if readme.exist?
+  spec.description   =  <<-EOF.gsub(/^\s{4}/, '')
+    Simple configuration management. For a description on
+    how to use this gem please check the readme file on
+    https://github.com/comparaonline/co_config/blob/master/README.md
+  EOF
   spec.homepage      = "https://github.com/comparaonline/co_config"
   spec.license       = "MIT"
 
