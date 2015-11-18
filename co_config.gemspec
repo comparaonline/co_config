@@ -2,6 +2,9 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'co_config/version'
+require 'pathname'
+
+readme = Pathname.new(File.expand_path('../readme.md', __FILE__))
 
 Gem::Specification.new do |spec|
   spec.name          = "co_config"
@@ -10,6 +13,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["erabinovich@gmail.com"]
 
   spec.summary       = %q{Simple configuration management gem.}
+  spec.description   = readme.read if readme.exist?
   spec.homepage      = "https://github.com/comparaonline/co_config"
   spec.license       = "MIT"
 
@@ -18,10 +22,10 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency 'activesupport', '>= 3.0'
-  spec.add_dependency 'rails', '>= 3.0'
+  spec.add_dependency 'activesupport', '>= 3.0', '< 5'
+  spec.add_dependency 'rails', '>= 3.0', '< 5'
 
-  spec.add_development_dependency "bundler", ">= 1.9"
+  spec.add_development_dependency "bundler", "~> 1.9"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec"
+  spec.add_development_dependency "rspec", "~> 3"
 end
