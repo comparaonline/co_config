@@ -54,6 +54,32 @@ defaults:
 
 To read your configuration you can access the hash (with indifferent access) at `CoConfig::CONFIG_NAME_UPPERCASE`
 
+## To use on your engine/gem
+
+If you want to load configuration from a different path (e.g. your engine's directory), you can do this:
+
+```ruby
+# lib/my_engine/railtie.rb
+require 'rails/railtie'
+module MyEngine
+  class Railtie < ::Rails::Railtie
+    config.before_configuration do
+      CoConfig.load(MyEngine::Engine.root.join('config'))
+    end
+  end
+end
+
+# lib/my_engine.rb
+require 'my_engine/railtie'
+
+module MyEngine
+  class Engine < ::Rails::Engine
+  end
+end
+```
+
+It will load `my_engine/config/configuration.rb`, and in there, `load` method calls will include configuration files in the same directory.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
