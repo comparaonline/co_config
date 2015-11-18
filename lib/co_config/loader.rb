@@ -30,9 +30,17 @@ module CoConfig
     end
 
     def load_yaml(file_name)
-      file = CoConfig.config_path(file_name)
+      file = config_path(file_name)
       fail MissingFileError.new(file_name.to_s) unless file.exist?
       ::YAML.load_file(file).with_indifferent_access
+    end
+
+    def config_path(file_name)
+      if defined?(@location)
+        @location.join(file_name)
+      else
+        CoConfig.config_path(file_name)
+      end
     end
 
     def full_name(file_name)
